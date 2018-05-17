@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	"github.com/aws/aws-lambda-go/events"
-	main "github.com/funfuck/lambda-sample-function"
+	"github.com/funfuck/lambda-sample-function/handler"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -26,12 +26,12 @@ func TestHandler(t *testing.T) {
 			// when no name is provided in the HTTP body
 			request: events.APIGatewayProxyRequest{Body: ""},
 			expect:  "",
-			err:     main.ErrNameNotProvided,
+			err:     handler.ErrNameNotProvided,
 		},
 	}
 
 	for _, test := range tests {
-		response, err := main.Handler(test.request)
+		response, err := handler.Handler(test.request)
 		assert.IsType(t, test.err, err)
 		assert.Equal(t, test.expect, response.Body)
 	}

@@ -30,7 +30,7 @@ phases:
       # Check for common Go problems with 'go vet'
       - go vet .
       # Run all tests included with the application
-      - go test .
+      - go test ./tests
 
   build:
     commands:
