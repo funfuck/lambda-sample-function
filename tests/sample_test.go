@@ -1,10 +1,10 @@
 package test
 
 import (
-	"ev/function/sample/hdlr"
 	"testing"
 
 	"github.com/aws/aws-lambda-go/events"
+	main "github.com/funfuck/lambda-sample-function"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -26,12 +26,12 @@ func TestHandler(t *testing.T) {
 			// when no name is provided in the HTTP body
 			request: events.APIGatewayProxyRequest{Body: ""},
 			expect:  "",
-			err:     hdlr.ErrNameNotProvided,
+			err:     main.ErrNameNotProvided,
 		},
 	}
 
 	for _, test := range tests {
-		response, err := hdlr.Handler(test.request)
+		response, err := main.Handler(test.request)
 		assert.IsType(t, test.err, err)
 		assert.Equal(t, test.expect, response.Body)
 	}
